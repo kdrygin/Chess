@@ -14,6 +14,8 @@ namespace ChessCore221
         protected int x;
         protected int y;
 
+        public object Parent;
+
         public Piece(int newX, int newY)
         {
             x = newX;
