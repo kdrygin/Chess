@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFSimpleChess"
         mc:Ignorable="d"
-        Title="ChessBoard" Height="450" Width="550" ResizeMode="NoResize">
+        Title="ChessBoard" Height="550" Width="650" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="DeskField">
-            <Setter Property="Control.FontFamily" Value="Verdana" />
+            <Setter Property="Control.FontSize" Value="18" />
             <Setter Property="Control.Margin" Value="0" />
             <Setter Property="Control.BorderThickness" Value="0" />
+            <EventSetter Event="Button.Click" Handler="Field_Click" />
         </Style>
         <Style x:Key="BlackField" BasedOn="{StaticResource DeskField}">
             <Setter Property="Control.Background" Value="Black" />
@@ -47,7 +48,7 @@
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
-        
+
         <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource WhiteField}"/>
         <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource BlackField}"/>
         <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource WhiteField}"/>
@@ -56,7 +57,7 @@
         <Button Grid.Column="6" Grid.Row="1" Style="{StaticResource BlackField}"/>
         <Button Grid.Column="7" Grid.Row="1" Style="{StaticResource WhiteField}"/>
         <Button Grid.Column="8" Grid.Row="1" Style="{StaticResource BlackField}"/>
-        
+
         <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource BlackField}"/>
         <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource WhiteField}"/>
         <Button Grid.Column="3" Grid.Row="2" Style="{StaticResource BlackField}"/>
@@ -123,8 +124,9 @@
         <Border Grid.Row="1" Grid.RowSpan="8" Grid.Column="1" Grid.ColumnSpan="8"
                 BorderBrush="Black" BorderThickness="1"/>
 
-
-        <ListBox Grid.Column="10" HorizontalAlignment="Left" Height="349" Grid.Row="1" Grid.RowSpan="8" VerticalAlignment="Top" Width="80" Margin="10,10,0,0">
+        <ListBox x:Name="lbPieces" Grid.Column="10" HorizontalAlignment="Left" 
+                 Height="450" Grid.Row="1" Grid.RowSpan="8" VerticalAlignment="Top" 
+                 Width="100" SelectedIndex="0" FontSize="18">
             <ListBoxItem>King</ListBoxItem>
             <ListBoxItem>Queen</ListBoxItem>
             <ListBoxItem>Bishop</ListBoxItem>
