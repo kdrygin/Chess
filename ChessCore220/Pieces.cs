@@ -10,6 +10,8 @@ namespace ChessCore220
     // Piece classes 
     public abstract class Piece
     {
+        public object Parent; 
+
         protected int x;
         protected int y;
 

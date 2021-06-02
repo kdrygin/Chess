@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChessCore220\ChessCore220.csproj">
+      <Project>{8481dbc8-14ed-4952-8d2a-4df464720d7c}</Project>
+      <Name>ChessCore220</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

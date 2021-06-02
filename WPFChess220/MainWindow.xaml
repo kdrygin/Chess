@@ -11,6 +11,8 @@
             <Setter Property="Control.FontSize" Value="18" />
             <Setter Property="Control.Margin" Value="0" />
             <Setter Property="Control.BorderThickness" Value="0" />
+            <EventSetter Event="Button.Click" Handler="Field_Click" />
+            <EventSetter Event="Button.MouseEnter" Handler="Button_MouseEnter" />
         </Style>
         <Style x:Key="BlackField" BasedOn="{StaticResource DeskField}">
             <Setter Property="Control.Background" Value="Black" />
