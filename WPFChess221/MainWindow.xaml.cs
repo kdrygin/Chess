@@ -62,5 +62,16 @@ namespace WPFChess221
                 piece = null;
             }
         }
+
+        private void Button_MouseEnter(object sender, RoutedEventArgs e)
+        {
+            Button selectedButton = (Button)sender;
+            int x = Grid.GetColumn(selectedButton);
+            int y = Grid.GetRow(selectedButton);
+            if (selectedButton.Content.ToString() == "" && piece != null)
+            {
+                selectedButton.Content = piece.TestMove(x, y) ? "YES" : "NO";
+            }
+        }
     }
 }
