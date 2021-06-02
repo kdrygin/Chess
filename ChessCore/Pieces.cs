@@ -11,13 +11,13 @@ namespace ChessCore
 
     abstract public class Piece
     {
-        protected int x;
-        protected int y;
+        public int X { get; protected set; }
+        public int Y { get; protected set; }
 
         public Piece(int newX, int newY)
         {
-            x = newX;
-            y = newY;
+            X = newX;
+            Y = newY;
         }
         public abstract bool TestMove(int newX, int newY);
 
@@ -25,8 +25,8 @@ namespace ChessCore
         {
             if (TestMove(newX, newY))
             {
-                x = newX;
-                y = newY;
+                X = newX;
+                Y = newY;
                 return true;
             }
             return false;
@@ -40,7 +40,7 @@ namespace ChessCore
 
         public override bool TestMove(int newX, int newY)
         {
-            return (Math.Abs(x - newX) <= 1 && Math.Abs(y - newY) <= 1);
+            return (Math.Abs(X - newX) <= 1 && Math.Abs(Y - newY) <= 1);
         }
 
     }
@@ -52,7 +52,7 @@ namespace ChessCore
 
         public override bool TestMove(int newX, int newY)
         {
-            return (x == newX || y == newY || Math.Abs(x - newX) == Math.Abs(y - newY));
+            return (X == newX || Y == newY || Math.Abs(X - newX) == Math.Abs(Y - newY));
         }
     }
 
@@ -63,7 +63,7 @@ namespace ChessCore
 
         public override bool TestMove(int newX, int newY)
         {
-            return (Math.Abs(x - newX) == Math.Abs(y - newY));
+            return (Math.Abs(X - newX) == Math.Abs(Y - newY));
         }
     }
 
@@ -74,8 +74,8 @@ namespace ChessCore
 
         public override bool TestMove(int newX, int newY)
         {
-            return ((Math.Abs(x - newX) == 2 && Math.Abs(y - newY) == 1) ||
-                    (Math.Abs(x - newX) == 1 && Math.Abs(y - newY) == 2));
+            return ((Math.Abs(X - newX) == 2 && Math.Abs(Y - newY) == 1) ||
+                    (Math.Abs(X - newX) == 1 && Math.Abs(Y - newY) == 2));
         }
     }
 
@@ -86,7 +86,7 @@ namespace ChessCore
 
         public override bool TestMove(int newX, int newY)
         {
-            return (x == newX || y == newY);
+            return (X == newX || Y == newY);
         }
 
     }
@@ -98,8 +98,8 @@ namespace ChessCore
 
         public override bool TestMove(int newX, int newY)
         {
-            return ((x == newX && y == 2 && y + 2 >= newY) ||
-                    (x == newX && y + 1 == newY));
+            return ((X == newX && Y == 2 && Y + 2 >= newY) ||
+                    (X == newX && Y + 1 == newY));
         }
 
     }

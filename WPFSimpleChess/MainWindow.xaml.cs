@@ -22,11 +22,13 @@ namespace WPFSimpleChess
     public partial class MainWindow : Window
     {
         private Piece piece;
-        private Button piecePosition;
+        private List<string> piecesNames;
 
         public MainWindow()
         {
             InitializeComponent();
+            piecesNames = new List<string> { "King", "Queen", "Bishop", "Rook", "Knight" };
+            lbPieces.ItemsSource = piecesNames;
         }
 
         private void Field_Click(object sender, RoutedEventArgs e)
@@ -36,30 +38,59 @@ namespace WPFSimpleChess
             int col = Grid.GetColumn(clickedButton);
 
             //clear
-            if (clickedButton.Content != null && piece != null)
+            if (clickedButton.Content.ToString() != "" && piece != null)
             {
-                clickedButton.Content = null;
+                clickedButton.Content = "";
                 piece = null;
-                clickedButton = null;
                 return;
             }
 
             // set piece
-            if (clickedButton.Content == null && piece == null)
+            if (clickedButton.Content.ToString() == "" && piece == null)
             {
-                var selPieceName = ((ListBoxItem)lbPieces.SelectedValue).Content.ToString();
+                var selPieceName = piecesNames[lbPieces.SelectedIndex];
                 clickedButton.Content = selPieceName;
                 piece = PieceMaker.Make(selPieceName, col, row);
-                piecePosition = clickedButton;
                 return;
             }
 
             // move
-            if (clickedButton.Content == null && piece.Move(col, row))
+            var currentButton = GetButton(piece.X, piece.Y);
+            if (piece.Move(col, row))
             {
-                clickedButton.Content = piecePosition.Content.ToString();
-                piecePosition.Content = null;
-                piecePosition = clickedButton;
+                clickedButton.Content = currentButton.Content.ToString();
+                currentButton.Content = "";
+            }
+        }
+        private Button GetButton(int column, int row)
+        {
+            foreach (Button child in grLayout.Children)
+            {
+                if (Grid.GetRow(child) == row && Grid.GetColumn(child) == column)
+                {
+                    return child;
+                }
+            }
+            return null;
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button selectedButton = (Button)sender;
+            int row = Grid.GetRow(selectedButton);
+            int col = Grid.GetColumn(selectedButton);
+            if (piece != null && selectedButton.Content.ToString() == "" )
+            { 
+                selectedButton.Content = piece.TestMove(col, row) ? "YES" : "NO";
+            }
+        }
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button selectedButton = (Button)sender;
+            string content = selectedButton.Content.ToString();
+            if (content == "YES" || content == "NO")
+            {
+                selectedButton.Content = "";
             }
         }
     }
